@@ -4,7 +4,7 @@
             <div class="col-xs-12">
                 <div>
                     <form class="form-inline" role="form">
-                        <span class="btn-group" >
+                        <span class="btn-group">
                             <button ng-repeat="item in exampleLocations" ng-click="setLocation(item)" type="submit" class="btn btn-default">{{item}}</button>
                         </span>
                         <span class="form-group {{hasState}}">
@@ -17,11 +17,24 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="weather-data" ng-show="true">
         <div class="row">
             <div class="col-xs-12">
-                <div class="">
+                <div>
+                    <!--<form class="form-inline" role="form">
+                        <span class="form-group {{hasState}}">
+                            <label class="sr-only" for="customCity">Custom City</label>
+                            <input ng-model="customCity" type="text" class="form-control" id="customCity" placeholder="Enter custom city name">
+                        </span>
+                        <button ng-click="getWeatherForCustomCity()" type="button" class="btn btn-primary">Get Weather</button>
+                    </form>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="weather-data" ng-show="forecast.city">
+        <div class="row">
+            <div class="col-xs-12">
+                <div>
                     <h3>
                         {{forecast.city.name | placeholder:'?'}}, {{forecast.city.country | isoCountry}}
                         <small>Lon: {{forecast.city.coord.lon | number:2}} Lat: {{forecast.city.coord.lat | number:2}} Population: {{forecast.city.population | number:0}}</small>

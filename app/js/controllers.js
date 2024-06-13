@@ -7,7 +7,7 @@ angular.module('openWeatherApp.controllers', [])
   // Controller for "open weather map" api data search
   .controller('OpenWeatherCtrl',
     ['$scope','openWeatherMap','exampleLocations','stormLocations','ISO3166',
-      function($scope,openWeatherMap,exampleLocations,stormLocations,ISO3166) {
+      function($scope, openWeatherMap, exampleLocations, stormLocations, ISO3166) {
 
     $scope.message = '';
     $scope.hasState = '';
@@ -19,13 +19,13 @@ angular.module('openWeatherApp.controllers', [])
 
     // On initialization load data for first example entry
     $scope.forecast = openWeatherMap.queryForecastDaily({
-      location: exampleLocations[ 0 ]
+      location: exampleLocations[0]
     });
 
     // Get forecast data for location as given in $scope.location
     $scope.getForecastByLocation = function() {
 
-      if ($scope.location == '' || $scope.location == undefined) {
+      if ($scope.location === '' || $scope.location === undefined) {
         $scope.hasState = 'has-warning';
         $scope.message = 'Please provide a location';
         return;
@@ -49,4 +49,19 @@ angular.module('openWeatherApp.controllers', [])
       return (iconName ? $scope.iconBaseUrl + iconName + '.png' : '');
     };
 
-  }])
+    // Function to fetch weather data for a custom city
+    $scope.getWeatherForCustomCity = function() {
+      if ($scope.customCity === '' || $scope.customCity === undefined) {
+        $scope.hasState = 'has-warning';
+        $scope.message = 'Please provide a city name';
+        return;
+      }
+
+      $scope.hasState = 'has-success';
+      
+      $scope.forecast = openWeatherMap.queryForecastDaily({
+        location: $scope.customCity
+      });
+    };
+
+  }]);
